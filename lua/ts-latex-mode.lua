@@ -1,5 +1,5 @@
 local has_treesitter, ts = pcall(require, 'vim.treesitter')
-local _, query = pcall(require, 'vim.treesitter.query')
+-- local _, query = pcall(require, 'vim.treesitter.query')
 
 local M = {}
 
@@ -75,7 +75,7 @@ function M.in_mathzone()
       local names = begin and begin:field 'name'
 
       if names and names[1] then
-        local env_name = query.get_node_text(names[1], buf):match '{([a-zA-Z%d%*]*)}'
+        local env_name = vim.treesitter.get_node_text(names[1], buf):match '{([a-zA-Z%d%*]*)}'
         if MATH_ENVIRONMENTS[env_name] ~= nil then
           return MATH_ENVIRONMENTS[env_name]
         end
