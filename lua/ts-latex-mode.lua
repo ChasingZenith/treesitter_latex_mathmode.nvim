@@ -7,6 +7,9 @@ local MATH_NODES = {
     displayed_equation = true,
     inline_formula = true,
     math_environment = true,
+    text_mode = false,
+    curly_group_text = false,
+    brack_group_text = false,
 }
 
 local COMMENT = {
@@ -52,7 +55,7 @@ function M.in_mathzone()
     if has_treesitter then
         local node = get_node_at_cursor()
         while node do
-            if node:type() == 'text_mode' then
+            if MATH_NODES[node:type()] == false then
                 return false
             elseif MATH_NODES[node:type()] then
                 return true
